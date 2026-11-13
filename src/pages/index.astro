@@ -1,4 +1,99 @@
 ---
-// Root: send visitors to the style chooser.
+// Table Studio main page (tablestudio.in): what we do + contact. Indexable (marketing=true).
+import Base from '../layouts/Base.astro';
+import { translations as tr } from '../i18n/translations';
+const T = tr.pt;
+const EMAIL = 'kishar_admin@tablestudio.in';
+const features = [
+  ['sF1t', 'sF1d'], ['sF2t', 'sF2d'], ['sF3t', 'sF3d'], ['sF4t', 'sF4d'],
+] as const;
+const steps = [['sS1t', 'sS1d'], ['sS2t', 'sS2d'], ['sS3t', 'sS3d']] as const;
+const styles = [['classic', 'classicDesc'], ['modern', 'modernDesc'], ['cafe', 'cafeDesc']] as const;
 ---
-<html lang="pt-PT"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/styles"><title>Table Studio</title></head><body><a href="/styles">/styles</a></body></html>
+<Base title="Table Studio — Sites para restaurantes em Lisboa" style="studio" marketing>
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="/">Table Studio</a>
+      <button type="button" class="lang-toggle" id="lang-toggle" aria-label={T.langLabel}><span data-t="lang">{T.lang}</span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <img class="hero-img" src="/placeholders/classic-2.webp" alt="" width="1200" height="1067" fetchpriority="high" decoding="async" />
+      <div class="hero-body wrap">
+        <p class="eyebrow" data-t="sTag">{T.sTag}</p>
+        <h1 data-t="sH1">{T.sH1}</h1>
+        <p class="lead" data-t="sSub">{T.sSub}</p>
+        <div class="actions">
+          <a class="btn btn-wa" data-studio-wa href="https://wa.me/918724014050" target="_blank" rel="noopener noreferrer" data-t="sCtaWa">{T.sCtaWa}</a>
+          <a class="btn btn-ghost" href="/styles" data-t="sCtaSamples">{T.sCtaSamples}</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="what" aria-labelledby="what-t">
+      <div class="wrap">
+        <h2 id="what-t" data-t="sWhatTitle">{T.sWhatTitle}</h2>
+        <p class="muted intro" data-t="sWhatIntro">{T.sWhatIntro}</p>
+        <ul class="feat-grid">
+          {features.map(([t, d], i) => (
+            <li class="feat">
+              <span class="num" aria-hidden="true">0{i + 1}</span>
+              <h3 data-t={t}>{T[t]}</h3>
+              <p data-t={d}>{T[d]}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section alt" id="how" aria-labelledby="how-t">
+      <div class="wrap">
+        <h2 id="how-t" data-t="sHowTitle">{T.sHowTitle}</h2>
+        <ol class="steps">
+          {steps.map(([t, d], i) => (
+            <li><span class="step-n" aria-hidden="true">{i + 1}</span><div><h3 data-t={t}>{T[t]}</h3><p data-t={d}>{T[d]}</p></div></li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="styles" aria-labelledby="st-t">
+      <div class="wrap">
+        <h2 id="st-t" data-t="sStylesTitle">{T.sStylesTitle}</h2>
+        <ul class="style-cards">
+          {styles.map(([s, d]) => (
+            <li class={`style-card sc-${s}`}>
+              <img src={`/placeholders/${s}-1.webp`} alt="" width="1200" height="800" loading="lazy" decoding="async" />
+              <div class="sc-body">
+                <h3 data-t={s}>{T[s]}</h3>
+                <p data-t={d}>{T[d]}</p>
+                <a class="btn btn-primary" href={`/${s}`}><span data-t="open">{T.open}</span> →</a>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p class="muted small" data-t="sStylesNote">{T.sStylesNote}</p>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="ct-t">
+      <div class="wrap">
+        <h2 id="ct-t" data-t="sContactTitle">{T.sContactTitle}</h2>
+        <p class="intro" data-t="sContactText">{T.sContactText}</p>
+        <p class="muted" data-t="sPriceNote">{T.sPriceNote}</p>
+        <ul class="contact-list">
+          <li><span class="muted">WhatsApp</span> <a data-studio-wa href="https://wa.me/918724014050" target="_blank" rel="noopener noreferrer">+91 87240 14050</a></li>
+          <li><span class="muted" data-t="email">{T.email}</span> <a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-wa" data-studio-wa href="https://wa.me/918724014050" target="_blank" rel="noopener noreferrer" data-t="sCtaWa">{T.sCtaWa}</a>
+          <a class="btn btn-ghost" href={`mailto:${EMAIL}`} data-t="email">{T.email}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap"><p><strong>Table Studio</strong> · Kishar · <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p></div></footer>
+</Base>

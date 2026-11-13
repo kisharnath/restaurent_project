@@ -89,9 +89,12 @@ function fillText() {
     n.setAttribute('href', n.dataset.nav! + qs);
   });
 
+  // Table Studio's own WhatsApp (landing page only): number is fixed, only the message language changes
+  all('[data-studio-wa]').forEach((n) => n.setAttribute('href', 'https://wa.me/918724014050?text=' + encodeURIComponent(t.sWaMsg)));
+
   const toggle = el('#lang-toggle');
   if (toggle) toggle.setAttribute('aria-label', t.langLabel);
-  document.title = `${r.name} — ${pageStyle === 'neutral' ? t.stylesTitle : t.preview}`;
+  if (!document.body.dataset.keepTitle) document.title = `${r.name} — ${pageStyle === 'neutral' ? t.stylesTitle : t.preview}`;
 
   // accent colour (validated hex from JSON only)
   if (/^#[0-9a-f]{6}$/i.test(r.colourAccent)) document.documentElement.style.setProperty('--accent', r.colourAccent);
