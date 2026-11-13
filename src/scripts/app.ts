@@ -1,8 +1,8 @@
 /**
  * Client script shared by every page.
- *  1. reads ?r=<slug>, looks it up in restaurants.json (unknown/missing -> sample)
- *  2. fills the page. SECURITY: only values found in the JSON are used, and always
- *     via textContent / setAttribute. Nothing from the URL is ever rendered.
+ *  1. reads ?r=<slug>, looks it up in restaurants.json (unknown -> name from URL, other details from sample)
+ *  2. fills the page. SECURITY: the only URL-derived value is the display name, sanitised and
+ *     inserted via textContent. Everything else comes from the JSON.
  *  3. PT/EN toggle, menu tabs, QR code.
  */
 import restaurants from '../data/restaurants.json';
@@ -14,11 +14,31 @@ type Restaurant = (typeof restaurants)[number];
 
 const pageStyle = document.body.dataset.style ?? 'neutral';
 
-// --- 1. lookup: the URL value is only ever compared, never inserted -------------
-const requested = new URLSearchParams(location.search).get('r');
+// --- 1. lookup ---------------------------------------------------------------------
+// Priority: known slug in restaurants.json -> full data from JSON.
+// Otherwise a *name only* may come from the URL (?r=my-place or ?n=Casa%20do%20Zé);
+// phone, address, menu etc. stay those of the sample, so nothing else changes.
+// SECURITY: the name is plain text, length-limited, stripped of control characters and
+// only ever inserted with textContent, so it can never run as HTML or script.
+const params = new URLSearchParams(location.search);
+const requested = params.get('r');
 const found = restaurants.find((x) => x.slug === requested);
 const sample = restaurants.find((x) => x.style === pageStyle) ?? restaurants[0];
-const r: Restaurant = found ?? sample;
+
+const clean = (v: string) => v.replace(/[\u0000-\u001f\u007f]/g, '').replace(/\s+/g, ' ').trim().slice(0, 60);
+const prettify = (slug: string) => slug.split('-').filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+let customName = '';
+let qs = ''; // query string re-used on internal links and in the QR code
+if (found) {
+  qs = '?r=' + encodeURIComponent(found.slug);
+} else if (params.get('n') && clean(params.get('n')!)) {
+  customName = clean(params.get('n')!);
+  qs = '?n=' + encodeURIComponent(customName);
+} else if (requested && /^[a-z0-9]+(-[a-z0-9]+)*$/i.test(requested) && requested.length <= 60) {
+  customName = prettify(requested);
+  qs = '?r=' + encodeURIComponent(requested);
+}
+const r: Restaurant = found ?? (customName ? { ...sample, name: customName } : sample);
 
 let lang: Lang = r.defaultLang === 'en' ? 'en' : 'pt';
 try {
@@ -66,7 +86,7 @@ function fillText() {
 
   // keep ?r=<slug> (taken from JSON, not from the URL) on internal links
   all('[data-nav]').forEach((n) => {
-    n.setAttribute('href', n.dataset.nav! + (found ? '?r=' + encodeURIComponent(found.slug) : ''));
+    n.setAttribute('href', n.dataset.nav! + qs);
   });
 
   const toggle = el('#lang-toggle');
@@ -158,7 +178,7 @@ async function renderQr() {
   const img = el<HTMLImageElement>('#qr-img');
   if (!img) return;
   const style = found ? found.style : pageStyle === 'neutral' ? 'classic' : pageStyle;
-  const url = `${location.origin}/${style}/menu` + (found ? '?r=' + encodeURIComponent(found.slug) : '');
+  const url = `${location.origin}/${style}/menu` + qs;
   const QR = (await import('qrcode')).default;
   img.src = await QR.toDataURL(url, { width: 600, margin: 1, errorCorrectionLevel: 'M' });
   img.alt = `QR code → ${url}`;

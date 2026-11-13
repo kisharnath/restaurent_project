@@ -23,8 +23,10 @@ npm run preview
 ## How the restaurant name gets filled in
 `/classic?r=<slug>` → the page script (`src/scripts/app.ts`) looks the slug up in
 `src/data/restaurants.json`. Unknown or missing slug → the sample restaurant for that style.
-The URL value is only *compared* to known slugs; every value shown comes from the JSON and is
-inserted with `textContent` (never `innerHTML`), so URL text can never be rendered.
+If the slug is not in the JSON, the page uses the sample's phone/address/menu and only the **name** is
+taken from the URL: `?r=casa-do-ze` shows "Casa Do Ze", or `?n=Casa%20do%20Zé` shows the exact
+spelling (max 60 characters). No JSON edit needed. The name is inserted with `textContent` only
+(never `innerHTML`), so it can't run as HTML/script.
 Translations: `src/i18n/translations.ts`.
 
 ## Add a new restaurant
