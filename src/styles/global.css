@@ -189,3 +189,101 @@ a { color: inherit; }
 @media (min-width: 48rem) { .theme-cafe .hero-img { aspect-ratio: 21/9; } }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ============================================================
+   POLISH PASS: mobile ergonomics + richer per-style look
+   ============================================================ */
+html { -webkit-text-size-adjust: 100%; }
+body { -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
+.btn { transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease; box-shadow: 0 1px 0 rgb(0 0 0 / .08); }
+.btn:active { transform: translateY(1px) scale(.985); }
+@media (hover: hover) { .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgb(0 0 0 / .18); } }
+.mbar { padding-bottom: calc(.6rem + env(safe-area-inset-bottom)); box-shadow: 0 -6px 20px rgb(0 0 0 / .08); }
+.has-bar { padding-bottom: calc(5rem + env(safe-area-inset-bottom)); }
+.section { padding-block: clamp(2.75rem, 8vw, 5rem); }
+.section > .wrap > h2 { margin-bottom: 1rem; }
+
+/* Mobile: full-width, thumb-sized hero actions; hero fills the first screen */
+@media (max-width: 47.99rem) {
+  .hero { min-height: min(78svh, 38rem); }
+  .hero .actions .btn, .contact .actions .btn { flex: 1 1 100%; min-height: 3.25rem; font-size: 1.05rem; }
+  .qr-box { justify-self: center; }
+  .qr-text { text-align: center; }
+  .qr-text .btn { width: 100%; }
+  .more .btn { width: 100%; }
+  .item { padding-block: 1rem; }
+  .item-head { font-size: 1.15rem; }
+  .tab { font-size: 1rem; }
+}
+
+/* Gallery: first photo wide on mobile */
+.gal-grid li:first-child { grid-column: 1 / -1; }
+.gal-grid li:first-child img { aspect-ratio: 16/10; }
+@media (min-width: 48rem) { .gal-grid li:first-child { grid-column: span 2; grid-row: span 2; } .gal-grid li:first-child img { aspect-ratio: auto; height: 100%; } }
+.gal-grid img { transition: transform .4s ease; }
+@media (hover: hover) { .gal-grid li { overflow: hidden; border-radius: var(--radius); } .gal-grid li:hover img { transform: scale(1.04); } }
+
+/* Info + contact as cards */
+.info-grid > div { background: var(--surface); padding: 1.5rem; border-radius: calc(var(--radius) + 6px); }
+.info-grid .btn { margin-top: 1rem; }
+.contact-list li { display: flex; flex-direction: column; font-size: 1.15rem; }
+.contact-list a { text-decoration-thickness: 2px; text-underline-offset: 4px; word-break: break-word; }
+.hours { font-size: 1.05rem; }
+
+/* Gentle entrance (skipped when reduced motion is on) */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-body > * { animation: rise .7s both ease-out; }
+  .hero-body > :nth-child(2) { animation-delay: .08s; } .hero-body > :nth-child(3) { animation-delay: .16s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+}
+
+/* ---------- CLASSIC ---------- */
+.theme-classic { background-image: radial-gradient(rgb(154 59 31 / .05) 1px, transparent 1px); background-size: 14px 14px; }
+.theme-classic .hero-body { border: 1px solid rgb(255 255 255 / .55); outline: 1px solid rgb(255 255 255 / .35); outline-offset: 6px; margin: 1.5rem auto; padding: 2.5rem 1.25rem; max-width: 46rem; }
+.theme-classic .hero h1 { text-shadow: 0 2px 18px rgb(0 0 0 / .45); }
+.theme-classic .eyebrow { font-variant: small-caps; letter-spacing: .15em; font-size: 1rem; }
+.theme-classic .info-grid > div, .theme-classic .style-card { border: 1px solid var(--line); box-shadow: 0 2px 0 var(--line); }
+.theme-classic .tab { background: #fffaf0; font-family: var(--font-head); }
+.theme-classic .item-name { font-family: var(--font-head); }
+.theme-classic .contact, .theme-classic .qr { border-block: 1px solid var(--line); }
+.theme-classic .topbar { background: #3b1d10; color: #fbf5ea; border: 0; }
+.theme-classic .topbar .lang-toggle { border-color: #e9c98a; color: #e9c98a; }
+
+/* ---------- MODERN ---------- */
+.theme-modern .hero { min-height: min(88svh, 46rem); }
+.theme-modern .hero-body::before { content: ""; display: block; width: 3.5rem; height: 3px; background: var(--accent); margin-bottom: 1.25rem; }
+.theme-modern .topbar { background: rgb(11 11 11 / .85); backdrop-filter: blur(10px); position: sticky; top: 0; }
+.theme-modern .brand { text-transform: uppercase; letter-spacing: .18em; font-size: .95rem; }
+.theme-modern .tabs-wrap { top: 3.5rem; }
+.theme-modern .cat { scroll-margin-top: 8.5rem; }
+.theme-modern .info-grid > div { background: transparent; border: 1px solid var(--line); }
+.theme-modern .item-price { color: var(--accent); }
+.theme-modern .tab[aria-current="true"] { background: transparent; color: var(--accent); border-color: var(--accent); }
+.theme-modern .section > .wrap > h2 { font-size: clamp(2rem, 8vw, 3.5rem); }
+.theme-modern .mbar { background: #0b0b0b; }
+
+/* ---------- CAFE ---------- */
+.theme-cafe .topbar { background: transparent; border: 0; }
+.theme-cafe .brand { color: var(--accent); font-weight: 900; }
+.theme-cafe .hero-body { max-width: 46rem; margin: 0; }
+.theme-cafe .hero { padding-top: .25rem; }
+.theme-cafe .section:nth-of-type(odd) { background: transparent; }
+.theme-cafe .qr { background: #ffd9b0; border-radius: 36px; margin: 1rem; }
+.theme-cafe .contact { background: #ffe9cf; border-radius: 36px; margin: 1rem; }
+.theme-cafe .info-grid > div { background: #fff; border: 2px solid var(--line); border-radius: 28px; }
+.theme-cafe .tabs-wrap { background: var(--bg); }
+.theme-cafe .tab { border-width: 2px; }
+.theme-cafe .cat-title::before { content: "● "; font-size: .6em; vertical-align: .2em; }
+.theme-cafe .btn { box-shadow: 0 4px 0 rgb(0 0 0 / .12); }
+.theme-cafe .btn:active { box-shadow: 0 1px 0 rgb(0 0 0 / .12); }
+.theme-cafe .mbar { border-radius: 24px 24px 0 0; }
+.theme-cafe .footer { border: 0; }
+
+/* /styles: bigger, tappable cards */
+.style-card { transition: transform .2s ease, box-shadow .2s ease; box-shadow: 0 4px 18px rgb(0 0 0 / .08); }
+@media (hover: hover) { .style-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgb(0 0 0 / .16); } }
+.sc-body .btn { width: 100%; }
+.style-cards h2 { font-size: 1.75rem; margin: 0; }
+.styles-page h1 { font-size: clamp(2rem, 7vw, 3rem); margin: 0; }
+.theme-classic .hero-body { width: calc(100% - 3rem); margin-inline: auto; }
+.theme-classic .hero { padding-block: 1rem; }

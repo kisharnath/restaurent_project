@@ -133,10 +133,12 @@ let observer: IntersectionObserver | undefined;
 function setupTabs() {
   observer?.disconnect();
   const links = [...document.querySelectorAll<HTMLAnchorElement>('.tab')];
+  let scrollTabs = false;
   const mark = (id: string) => links.forEach((a) => {
     const on = a.dataset.id === id;
     on ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current');
-    if (on) a.scrollIntoView({ block: 'nearest', inline: 'center' });
+    // centre the active tab horizontally inside the tab strip only (never scroll the page)
+    if (on && scrollTabs) { const bar = a.parentElement!; bar.scrollTo({ left: a.offsetLeft - (bar.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' }); }
   });
   links.forEach((a) => a.addEventListener('click', (e) => {
     e.preventDefault();
@@ -144,6 +146,7 @@ function setupTabs() {
     mark(a.dataset.id!);
   }));
   if (links[0]) mark(links[0].dataset.id!);
+  scrollTabs = true;
   observer = new IntersectionObserver((es) => {
     for (const e of es) if (e.isIntersecting) mark(e.target.id);
   }, { rootMargin: '-20% 0px -70% 0px' });
