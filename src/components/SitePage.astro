@@ -1,0 +1,85 @@
+---
+// One landing page, three looks: the visual style is driven by the body class
+// theme-<style> in src/styles/global.css. Same sections for every style.
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import MenuSection from './MenuSection.astro';
+import QrSection from './QrSection.astro';
+import Footer from './Footer.astro';
+import { translations as tr } from '../i18n/translations';
+import { sampleFor, PHOTOS, type Style } from '../lib/sample';
+const { style } = Astro.props as { style: Style };
+const T = tr.pt;
+const R = sampleFor(style);
+const photos = PHOTOS(style);
+---
+<Base title={`${R.name} — Pré-visualização`} style={style} bodyClass="has-bar">
+  <Header style={style} />
+  <main id="main">
+    <section class="hero">
+      <img class="hero-img" src={photos[0]} alt="Foto de exemplo (placeholder)" width="1200" height="800" fetchpriority="high" decoding="async" />
+      <div class="hero-body wrap">
+        <p class="eyebrow"><span data-f="cuisine">{R.cuisine.pt}</span> · <span data-f="city">{R.city}</span></p>
+        <h1 data-f="name">{R.name}</h1>
+        <div class="actions">
+          <a class="btn btn-primary" data-href="wa-book" href="#contact" data-t="book">{T.book}</a>
+          <a class="btn btn-ghost" data-href="tel" href="#contact" data-t="call">{T.call}</a>
+        </div>
+      </div>
+    </section>
+
+    <MenuSection />
+    <p class="wrap more"><a class="btn btn-ghost" href={`/${style}/menu`} data-nav={`/${style}/menu`} data-t="viewMenu">{T.viewMenu}</a></p>
+
+    <QrSection />
+
+    <section class="section gallery" id="gallery" aria-labelledby="gal-title">
+      <div class="wrap">
+        <h2 id="gal-title" data-t="gallery">{T.gallery}</h2>
+        <ul class="gal-grid">
+          {photos.map((src, i) => (
+            <li>
+              <img src={src} alt={`Foto de exemplo ${i + 1} (placeholder)`} width="1200" height="800" loading="lazy" decoding="async" />
+            </li>
+          ))}
+        </ul>
+        <p class="muted small" data-t="placeholderPhoto">{T.placeholderPhoto}</p>
+      </div>
+    </section>
+
+    <section class="section info" id="hours" aria-labelledby="hours-title">
+      <div class="wrap info-grid">
+        <div>
+          <h2 id="hours-title" data-t="hours">{T.hours}</h2>
+          <dl class="hours" id="hours-list"></dl>
+        </div>
+        <div>
+          <h2 data-t="address">{T.address}</h2>
+          <p><span data-f="address">{R.address}</span>, <span data-f="city">{R.city}</span></p>
+          <a class="btn btn-ghost" data-href="map" href="#" target="_blank" rel="noopener noreferrer" data-t="map">{T.map}</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <h2 id="contact-title" data-t="contact">{T.contact}</h2>
+        <ul class="contact-list">
+          <li><span class="muted" data-t="phone">{T.phone}</span> <a data-href="tel" data-f="phone" href="#">{R.phone}</a></li>
+          <li><span class="muted" data-t="email">{T.email}</span> <a data-href="mail" data-f="email" href="#">{R.email}</a></li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" data-href="tel" href="#" data-t="call">{T.call}</a>
+          <a class="btn btn-wa" data-href="wa" href="#" target="_blank" rel="noopener noreferrer" data-t="whatsapp">{T.whatsapp}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer style={style} />
+
+  <!-- Sticky mobile action bar -->
+  <div class="mbar">
+    <a class="btn btn-primary" data-href="wa-book" href="#contact" data-t="book">{T.book}</a>
+    <a class="btn btn-ghost" data-href="tel" href="#contact" data-t="call">{T.call}</a>
+  </div>
+</Base>

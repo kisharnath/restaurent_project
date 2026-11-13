@@ -1,0 +1,15 @@
+---
+// Top bar: restaurant name (filled from JSON) + PT/EN toggle.
+import { translations as tr } from '../i18n/translations';
+import { sampleFor, type Style } from '../lib/sample';
+const { style } = Astro.props as { style: Style };
+const R = sampleFor(style);
+---
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href={`/${style}`} data-nav={`/${style}`}><span data-f="name">{R.name}</span></a>
+    <button type="button" class="lang-toggle" id="lang-toggle" aria-label={tr.pt.langLabel}>
+      <span data-t="lang">{tr.pt.lang}</span>
+    </button>
+  </div>
+</header>

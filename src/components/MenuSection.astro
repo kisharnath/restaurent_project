@@ -1,0 +1,17 @@
+---
+// Menu with sticky category tabs. Content is rendered by src/scripts/app.ts
+// from restaurants.json (using textContent only).
+import { translations as tr } from '../i18n/translations';
+const { heading = true } = Astro.props as { heading?: boolean };
+---
+<section class="section menu" id="menu" aria-labelledby="menu-title">
+  <div class="wrap">
+    {heading && <h2 id="menu-title" data-t="menu">{tr.pt.menu}</h2>}
+    <p class="sample-flag" id="sample-flag" data-t="sampleMenu">{tr.pt.sampleMenu}</p>
+    <div class="tabs-wrap">
+      <nav class="tabs" id="menu-tabs" aria-label="Categorias"></nav>
+    </div>
+    <div id="menu-root"><noscript>JavaScript necessário para ver a ementa de exemplo.</noscript></div>
+    <p class="allergen-note" data-t="allergensNote">{tr.pt.allergensNote}</p>
+  </div>
+</section>

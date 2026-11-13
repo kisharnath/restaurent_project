@@ -1,0 +1,22 @@
+---
+// Printable A5/A6 table card. /qr-card?r=<slug>
+import Base from '../layouts/Base.astro';
+import { translations as tr } from '../i18n/translations';
+import { sampleFor } from '../lib/sample';
+const T = tr.pt;
+const R = sampleFor('classic');
+---
+<Base title="Cartão de mesa — QR" style="neutral" bodyClass="card-page">
+  <main id="main" class="card-wrap">
+    <article class="table-card">
+      <h1 data-f="name">{R.name}</h1>
+      <img id="qr-img" width="300" height="300" alt="QR code" />
+      <p class="scan" data-t="qrScan">{T.qrScan}</p>
+      <p class="muted small" id="sample-flag" data-t="sampleMenu">{T.sampleMenu}</p>
+    </article>
+    <div class="no-print actions">
+      <button type="button" class="btn btn-primary" id="print-btn" data-t="print">{T.print}</button>
+      <button type="button" class="lang-toggle" id="lang-toggle" aria-label={T.langLabel}><span data-t="lang">{T.lang}</span></button>
+    </div>
+  </main>
+</Base>

@@ -1,0 +1,12 @@
+---
+import { translations as tr } from '../i18n/translations';
+import { sampleFor, type Style } from '../lib/sample';
+const { style } = Astro.props as { style: Style };
+const R = sampleFor(style);
+---
+<footer class="footer">
+  <div class="wrap">
+    <p><strong data-f="name">{R.name}</strong> · <span data-f="address">{R.address}</span>, <span data-f="city">{R.city}</span></p>
+    <p class="muted" data-t="footer">{tr.pt.footer}</p>
+  </div>
+</footer>

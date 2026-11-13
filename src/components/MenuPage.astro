@@ -1,0 +1,19 @@
+---
+// Mobile-first stand-alone menu page (what the QR code opens).
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import MenuSection from './MenuSection.astro';
+import Footer from './Footer.astro';
+import { translations as tr } from '../i18n/translations';
+import { sampleFor, type Style } from '../lib/sample';
+const { style } = Astro.props as { style: Style };
+const R = sampleFor(style);
+---
+<Base title={`${R.name} — Ementa`} style={style} bodyClass="menu-page">
+  <Header style={style} />
+  <main id="main">
+    <div class="wrap back"><a href={`/${style}`} data-nav={`/${style}`} data-t="backHome">{tr.pt.backHome}</a></div>
+    <MenuSection />
+  </main>
+  <Footer style={style} />
+</Base>

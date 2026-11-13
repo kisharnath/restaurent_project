@@ -1,0 +1,30 @@
+---
+// Three cards side by side. Links keep ?r= so a prospect sees THEIR name in each style.
+import Base from '../layouts/Base.astro';
+import { translations as tr } from '../i18n/translations';
+import { STYLES } from '../lib/sample';
+const T = tr.pt;
+---
+<Base title="Estilos — Pré-visualização" style="neutral">
+  <main id="main" class="styles-page">
+    <div class="wrap">
+      <div class="styles-head">
+        <h1 data-t="stylesTitle">{T.stylesTitle}</h1>
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label={T.langLabel}><span data-t="lang">{T.lang}</span></button>
+      </div>
+      <p data-t="stylesIntro">{T.stylesIntro}</p>
+      <ul class="style-cards">
+        {STYLES.map((s) => (
+          <li class={`style-card sc-${s}`}>
+            <img src={`/placeholders/${s}-1.webp`} alt={`Foto de exemplo (${s})`} width="1200" height="800" loading="lazy" decoding="async" />
+            <div class="sc-body">
+              <h2 data-t={s}>{T[s]}</h2>
+              <p data-t={`${s}Desc`}>{T[`${s}Desc` as 'classicDesc']}</p>
+              <a class="btn btn-primary" href={`/${s}`} data-nav={`/${s}`}><span data-t="open">{T.open}</span> →</a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+</Base>

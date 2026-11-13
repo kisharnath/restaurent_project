@@ -1,0 +1,104 @@
+[
+  {
+    "slug": "tasca-exemplo",
+    "style": "classic",
+    "name": "Tasca do Exemplo",
+    "address": "Rua do Exemplo 00",
+    "city": "Lisboa",
+    "cuisine": { "pt": "Cozinha portuguesa tradicional", "en": "Traditional Portuguese cuisine" },
+    "phone": "+351 210 000 000",
+    "whatsapp": "351910000000",
+    "email": "exemplo@example.com",
+    "hours": [
+      { "days": { "pt": "Segunda a sexta", "en": "Monday to Friday" }, "open": "12:00–15:00 · 19:00–22:30" },
+      { "days": { "pt": "Sábado", "en": "Saturday" }, "open": "12:00–23:00" },
+      { "days": { "pt": "Domingo", "en": "Sunday" }, "open": { "pt": "Fechado", "en": "Closed" } }
+    ],
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Lisboa",
+    "defaultLang": "pt",
+    "colourAccent": "#9a3b1f",
+    "menuIsSample": true,
+    "menu": [
+      { "category": { "pt": "Entradas", "en": "Starters" }, "items": [
+        { "name": { "pt": "Prato de exemplo 1", "en": "Sample dish 1" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" },
+        { "name": { "pt": "Prato de exemplo 2", "en": "Sample dish 2" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" }
+      ]},
+      { "category": { "pt": "Pratos", "en": "Mains" }, "items": [
+        { "name": { "pt": "Prato de exemplo 3", "en": "Sample dish 3" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" },
+        { "name": { "pt": "Prato de exemplo 4", "en": "Sample dish 4" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" }
+      ]},
+      { "category": { "pt": "Sobremesas", "en": "Desserts" }, "items": [
+        { "name": { "pt": "Sobremesa de exemplo", "en": "Sample dessert" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" }
+      ]},
+      { "category": { "pt": "Bebidas", "en": "Drinks" }, "items": [
+        { "name": { "pt": "Bebida de exemplo", "en": "Sample drink" }, "description": { "pt": "", "en": "" }, "price": null, "allergens": "" }
+      ]}
+    ]
+  },
+  {
+    "slug": "bistro-exemplo",
+    "style": "modern",
+    "name": "Bistro Exemplo",
+    "address": "Avenida Exemplo 00",
+    "city": "Lisboa",
+    "cuisine": { "pt": "Cozinha de autor", "en": "Chef's cuisine" },
+    "phone": "+351 210 000 001",
+    "whatsapp": "351910000001",
+    "email": "bistro@example.com",
+    "hours": [
+      { "days": { "pt": "Terça a sábado", "en": "Tuesday to Saturday" }, "open": "18:30–23:00" },
+      { "days": { "pt": "Domingo e segunda", "en": "Sunday and Monday" }, "open": { "pt": "Fechado", "en": "Closed" } }
+    ],
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Lisboa",
+    "defaultLang": "pt",
+    "colourAccent": "#d4a24c",
+    "menuIsSample": true,
+    "menu": [
+      { "category": { "pt": "Entradas", "en": "Starters" }, "items": [
+        { "name": { "pt": "Prato de exemplo 1", "en": "Sample dish 1" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" },
+        { "name": { "pt": "Prato de exemplo 2", "en": "Sample dish 2" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" }
+      ]},
+      { "category": { "pt": "Pratos", "en": "Mains" }, "items": [
+        { "name": { "pt": "Prato de exemplo 3", "en": "Sample dish 3" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" },
+        { "name": { "pt": "Prato de exemplo 4", "en": "Sample dish 4" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" }
+      ]},
+      { "category": { "pt": "Sobremesas", "en": "Desserts" }, "items": [
+        { "name": { "pt": "Sobremesa de exemplo", "en": "Sample dessert" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" }
+      ]},
+      { "category": { "pt": "Bebidas", "en": "Drinks" }, "items": [
+        { "name": { "pt": "Bebida de exemplo", "en": "Sample drink" }, "description": { "pt": "", "en": "" }, "price": null, "allergens": "" }
+      ]}
+    ]
+  },
+  {
+    "slug": "cafe-exemplo",
+    "style": "cafe",
+    "name": "Café Exemplo",
+    "address": "Praça do Exemplo 00",
+    "city": "Lisboa",
+    "cuisine": { "pt": "Pastelaria e café", "en": "Bakery and café" },
+    "phone": "+351 210 000 002",
+    "whatsapp": "351910000002",
+    "email": "cafe@example.com",
+    "hours": [
+      { "days": { "pt": "Todos os dias", "en": "Every day" }, "open": "08:00–19:00" }
+    ],
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Lisboa",
+    "defaultLang": "pt",
+    "colourAccent": "#e0603a",
+    "menuIsSample": true,
+    "menu": [
+      { "category": { "pt": "Cafés", "en": "Coffees" }, "items": [
+        { "name": { "pt": "Bebida de exemplo 1", "en": "Sample drink 1" }, "description": { "pt": "", "en": "" }, "price": null, "allergens": "" },
+        { "name": { "pt": "Bebida de exemplo 2", "en": "Sample drink 2" }, "description": { "pt": "", "en": "" }, "price": null, "allergens": "" }
+      ]},
+      { "category": { "pt": "Pastelaria", "en": "Pastries" }, "items": [
+        { "name": { "pt": "Pastel de exemplo 1", "en": "Sample pastry 1" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" },
+        { "name": { "pt": "Pastel de exemplo 2", "en": "Sample pastry 2" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" }
+      ]},
+      { "category": { "pt": "Sandes e snacks", "en": "Sandwiches and snacks" }, "items": [
+        { "name": { "pt": "Snack de exemplo", "en": "Sample snack" }, "description": { "pt": "Descrição de exemplo.", "en": "Sample description." }, "price": null, "allergens": "" }
+      ]}
+    ]
+  }
+]

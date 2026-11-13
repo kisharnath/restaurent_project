@@ -1,0 +1,34 @@
+---
+// Base layout: <head>, noindex, per-style fonts, preview banner, shared client script.
+import '../styles/global.css';
+import Classic from '../components/fonts/Classic.astro';
+import Modern from '../components/fonts/Modern.astro';
+import Cafe from '../components/fonts/Cafe.astro';
+import { translations as tr } from '../i18n/translations';
+interface Props { title: string; style?: 'classic' | 'modern' | 'cafe' | 'neutral'; bodyClass?: string; }
+const { title, style = 'neutral', bodyClass = '' } = Astro.props;
+const T = tr.pt;
+---
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{title}</title>
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="data:," />
+    {style === 'classic' && <Classic />}
+    {style === 'modern' && <Modern />}
+    {style === 'cafe' && <Cafe />}
+  </head>
+  <body class={`theme-${style} ${bodyClass}`} data-style={style}>
+    <a href="#main" class="skip" data-t="skip">Saltar para o conteúdo</a>
+    <div class="preview-banner" role="note">
+      <strong data-t="preview">{T.preview}</strong>
+      <span data-t="previewNote">{T.previewNote}</span>
+    </div>
+    <slot />
+    <script>import '../scripts/app.ts';</script>
+  </body>
+</html>

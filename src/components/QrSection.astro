@@ -1,0 +1,16 @@
+---
+import { translations as tr } from '../i18n/translations';
+const T = tr.pt;
+---
+<section class="section qr" id="qr" aria-labelledby="qr-title">
+  <div class="wrap qr-in">
+    <div class="qr-text">
+      <h2 id="qr-title" data-t="qrTitle">{T.qrTitle}</h2>
+      <p data-t="qrText">{T.qrText}</p>
+      <a class="btn btn-ghost" href="/qr-card" data-nav="/qr-card" data-t="qrCard">{T.qrCard}</a>
+    </div>
+    <div class="qr-box">
+      <img id="qr-img" width="200" height="200" alt="QR code" />
+    </div>
+  </div>
+</section>
